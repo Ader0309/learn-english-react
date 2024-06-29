@@ -1,0 +1,105 @@
+body {
+    background: url(./assets/bg.jpg) center center/cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h1,
+h2,
+h3,
+h3,
+h4,
+h5,
+h6 {
+    margin-block: 1rem;
+    color: #a67b5b;
+}
+
+#root {
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    width: 60vw;
+}
+
+header button {
+    padding: 0.5rem 1.5rem;
+    background: #a67b5b;
+    border-radius: 1rem;
+    border: none;
+    color: #eee;
+    margin-inline: 0.5rem;
+    cursor: pointer;
+}
+header button:hover {
+    background: #6f4e37;
+}
+
+section {
+    margin-inline: 2rem;
+}
+section .list-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block: 0.5rem;
+}
+section .list-top button {
+    background: #fff1e4;
+    border: none;
+    border-radius: 0.6rem;
+    color: #a67b5b;
+    padding: 0.2rem 0.5rem;
+}
+section .list-top button:hover {
+    background: #ecc176;
+}
+section .list-top .per-page span {
+    margin-right: 0.5rem;
+    color: #a67b5b;
+}
+section .list-top .per-page button {
+    margin-inline: 0.2rem;
+}
+section .list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-block: 2.5rem;
+    justify-content: space-around;
+}
+section .list .card {
+    padding: 0.5rem 1.5rem;
+    background: #fff1e4;
+    border-radius: 0.5rem;
+    width: 7rem;
+    position: relative;
+    margin: 0.8rem 0.2rem;
+}
+section .list .card:hover {
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+section .list .card .delete,
+section .list .card .star {
+    position: absolute;
+    top: -1.2rem;
+    border: none;
+    color: #a67b5b;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.2rem 0.2rem 0 0;
+    background: #fff1e4;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+section .list .card .delete:hover,
+section .list .card .star:hover {
+    background: #ecc176;
+}
+section .list .card .delete {
+    right: 0;
+}
+section .list .card .star {
+    left: 0;
+} /*# sourceMappingURL=index.css.map */
