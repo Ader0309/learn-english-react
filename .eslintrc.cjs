@@ -19,6 +19,7 @@ module.exports = {
         ],
         "no-unused-vars": "warn",
         "import/no-unresolved": "warn",
+        "react/prop-types": "off",
     },
     plugins: ["react-refresh", "import"],
 };
