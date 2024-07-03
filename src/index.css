@@ -57,7 +57,7 @@ section .list-top {
 section .list-top button {
   background: #fff1e4;
   border: none;
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   color: #a67b5b;
   padding: 0.5rem 0.5rem;
 }
@@ -93,7 +93,7 @@ section .addEnglish input:focus-visible {
 section .addEnglish button {
   background: #a67b5b;
   border: none;
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   color: #fff1e4;
   padding: 0.5rem 1rem;
 }
@@ -104,6 +104,9 @@ section .list {
   display: flex;
   flex-wrap: wrap;
   margin-block: 2.5rem;
+}
+section .list > h3 {
+  margin-inline: auto;
 }
 section .list .card {
   padding: 0.5rem 1.5rem;
@@ -150,4 +153,29 @@ section .list .card .star {
 
 button.active {
   background: #6f4e37;
+}
+
+.modal {
+  background: #a67b5b;
+  padding: 2rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  min-width: 10rem;
+}
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+.modal h2 {
+  color: #fff1e4;
+}
+.modal button {
+  background: #fff1e4;
+  border: none;
+  border-radius: 0.5rem;
+  color: #a67b5b;
+  padding: 0.5rem 0.5rem;
+  margin-inline: 0.5rem;
+}
+.modal button:hover {
+  background: #ecc176;
 }/*# sourceMappingURL=index.css.map */

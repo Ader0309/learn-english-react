@@ -1,22 +1,13 @@
 import { useState } from "react";
 import ListTop from "./ListTop";
 
-export default function AddEnglish() {
+const path = "http://localhost:3000";
+
+export default function AddEnglish({ handleInputChange, handleAddData }) {
     const [showAddEnglish, setShowAddEnglish] = useState(false);
-    const [addData, setAddDate] = useState({ english: "", chinese: "" });
+
     function handleShowAddEnglish() {
         setShowAddEnglish((prev) => !prev);
-    }
-    function handleInputChange(e) {
-        setAddDate((prev) => {
-            return {
-                ...prev,
-                [e.target.name]: e.target.value,
-            };
-        });
-    }
-    function handleAddData() {
-        console.log(addData);
     }
 
     return (

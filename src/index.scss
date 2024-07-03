@@ -3,6 +3,7 @@ $second-color: #a67b5b;
 $third-color: #ecc176;
 $fourth-color: #fff1e4;
 $white: #eee;
+$border-radius: 0.5rem;
 body {
     background: url(./assets/bg.jpg) center center/cover;
     background-attachment: fixed;
@@ -56,7 +57,7 @@ section {
         button {
             background: $fourth-color;
             border: none;
-            border-radius: 0.6rem;
+            border-radius: $border-radius;
             color: $second-color;
             padding: 0.5rem 0.5rem;
             &:hover {
@@ -83,7 +84,7 @@ section {
             background: $fourth-color;
             padding: 0.5rem 1rem;
             color: $second-color;
-            border-radius: 0.5rem;
+            border-radius: $border-radius;
             &:focus-visible {
                 outline: none;
                 box-shadow: 0 0 5px $first-color;
@@ -92,7 +93,7 @@ section {
         & button {
             background: $second-color;
             border: none;
-            border-radius: 0.6rem;
+            border-radius: $border-radius;
             color: $fourth-color;
             padding: 0.5rem 1rem;
             &:hover {
@@ -104,10 +105,13 @@ section {
         display: flex;
         flex-wrap: wrap;
         margin-block: 2.5rem;
+        > h3 {
+            margin-inline: auto;
+        }
         .card {
             padding: 0.5rem 1.5rem;
             background: $fourth-color;
-            border-radius: 0.5rem;
+            border-radius: $border-radius;
             min-height: 6.6rem;
             width: 6.5rem;
             position: relative;
@@ -150,4 +154,29 @@ section {
 
 button.active {
     background: $first-color;
+}
+
+.modal {
+    background: $second-color;
+    padding: 2rem 2rem;
+    border: none;
+    border-radius: $border-radius;
+    min-width: 10rem;
+    &::backdrop {
+        background: rgba(0, 0, 0, 0.3);
+    }
+    h2 {
+        color: $fourth-color;
+    }
+    button {
+        background: $fourth-color;
+        border: none;
+        border-radius: $border-radius;
+        color: $second-color;
+        padding: 0.5rem 0.5rem;
+        margin-inline: 0.5rem;
+        &:hover {
+            background: $third-color;
+        }
+    }
 }
