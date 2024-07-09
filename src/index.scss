@@ -175,7 +175,8 @@ button.active {
     &::backdrop {
         background: rgba(0, 0, 0, 0.3);
     }
-    h2 {
+    h2,
+    h3 {
         color: $fourth-color;
     }
     button {
@@ -187,6 +188,20 @@ button.active {
         margin-inline: 0.5rem;
         &:hover {
             background: $third-color;
+        }
+    }
+}
+.modal.search {
+    background: $fourth-color;
+    h2,
+    h3 {
+        color: $second-color;
+    }
+    button {
+        background: $second-color;
+        color: $fourth-color;
+        &:hover {
+            background: $first-color;
         }
     }
 }

@@ -6,6 +6,7 @@ export default function Modal({
     openModal,
     closeModal,
     showCancelButton,
+    searchChinese = "",
 }) {
     const modalRef = useRef();
     useEffect(() => {
@@ -16,8 +17,14 @@ export default function Modal({
         }
     }, [openModal]);
     return createPortal(
-        <dialog className="modal" ref={modalRef} onCancel={closeModal}>
+        <dialog
+            className={`modal ${searchChinese === "" ? "" : "search"}`}
+            ref={modalRef}
+            onCancel={closeModal}
+        >
             <h2>{modalTitle}</h2>
+            <hr />
+            <h3>{searchChinese}</h3>
             {!showCancelButton && <button onClick={closeModal}>確定</button>}
             {showCancelButton && <button>刪除</button>}
             {showCancelButton && <button onClick={closeModal}>取消</button>}

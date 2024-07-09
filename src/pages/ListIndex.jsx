@@ -12,6 +12,9 @@ export default function ListIndex() {
     const [addData, setAddData] = useState({ english: "", chinese: "" });
     const [showModal, setShowModal] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
+    const [searchInput, setSearchInput] = useState("");
+    const [searchChinese, setSearchChinese] = useState("");
+
     //頁碼用
     const [perPage, setPerPage] = useState(25);
     const [currentPage, setCurrentPage] = useState(1);
@@ -59,10 +62,12 @@ export default function ListIndex() {
         if (response.status === "success") {
             setModalTitle(response.message);
             setShowModal(true);
+            setSearchChinese("");
             getData();
         } else if (response.status === "error") {
             setModalTitle(response.message);
             setShowModal(true);
+            setSearchChinese("");
         }
     }
 
@@ -101,6 +106,35 @@ export default function ListIndex() {
             return "取得資料失敗";
         }
     };
+
+    //查詢單字用
+    function handleSearchChange(e) {
+        setSearchInput(e.target.value);
+    }
+
+    // 查詢單字 API
+    const searchEnglish = async (data) => {
+        const response = await fetch(
+            `${path}/api/english?english=${searchInput}`
+        ).then((res) => res.json());
+        try {
+            if (response.status === "success") {
+                setModalTitle(response.message.english);
+                setSearchChinese(response.message.chinese);
+                setShowModal(true);
+            } else if (response.status === "error") {
+                setModalTitle(response.message);
+                setShowModal(true);
+                setSearchChinese("");
+            }
+        } catch (err) {
+            return "取得資料失敗";
+        }
+    };
+    function handleDoSearch() {
+        searchEnglish(searchInput);
+        setSearchInput("");
+    }
 
     //刪除單字 API
     const deleteEnglish = async (data) => {
@@ -150,6 +184,7 @@ export default function ListIndex() {
                 closeModal={() => setShowModal(false)}
                 showCancelButton={false}
                 modalTitle={modalTitle}
+                searchChinese={searchChinese}
             />
             <List
                 fetching={fetching}
@@ -163,6 +198,9 @@ export default function ListIndex() {
                     addData={addData}
                     handlePerPage={handlePerPage}
                     perPage={perPage}
+                    searchInput={searchInput}
+                    handleSearchChange={handleSearchChange}
+                    handleDoSearch={handleDoSearch}
                 />
             </List>
             <PageList

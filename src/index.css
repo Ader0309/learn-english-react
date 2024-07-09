@@ -178,7 +178,8 @@ button.active {
 .modal::backdrop {
   background: rgba(0, 0, 0, 0.3);
 }
-.modal h2 {
+.modal h2,
+.modal h3 {
   color: #fff1e4;
 }
 .modal button {
@@ -191,6 +192,21 @@ button.active {
 }
 .modal button:hover {
   background: #ecc176;
+}
+
+.modal.search {
+  background: #fff1e4;
+}
+.modal.search h2,
+.modal.search h3 {
+  color: #a67b5b;
+}
+.modal.search button {
+  background: #a67b5b;
+  color: #fff1e4;
+}
+.modal.search button:hover {
+  background: #6f4e37;
 }
 
 .page-list {
