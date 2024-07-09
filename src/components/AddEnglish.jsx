@@ -7,6 +7,9 @@ export default function AddEnglish({
     addData,
     handlePerPage,
     perPage,
+    searchInput,
+    handleSearchChange,
+    handleDoSearch,
 }) {
     const [showAddEnglish, setShowAddEnglish] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
@@ -49,6 +52,9 @@ export default function AddEnglish({
                 perPage={perPage}
                 showSearch={showSearch}
                 handleShowSearch={handleShowSearch}
+                searchInput={searchInput}
+                handleSearchChange={handleSearchChange}
+                handleDoSearch={handleDoSearch}
             >
                 <button onClick={handleShowAddEnglish}>
                     {showAddEnglish ? "取消新增" : "新增單字"}

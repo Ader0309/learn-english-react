@@ -7,6 +7,9 @@ export default function ListTop({
     perPage,
     handleShowSearch,
     showSearch,
+    searchInput,
+    handleSearchChange,
+    handleDoSearch,
 }) {
     return (
         <>
@@ -45,8 +48,13 @@ export default function ListTop({
             </div>
             {showSearch && (
                 <div className="search-english">
-                    <input type="text" placeholder="請輸入英文或中文" />
-                    <button>送出</button>
+                    <input
+                        type="text"
+                        placeholder="請輸入完整英文單字"
+                        value={searchInput}
+                        onChange={handleSearchChange}
+                    />
+                    <button onClick={handleDoSearch}>送出</button>
                 </div>
             )}
             {children2}
