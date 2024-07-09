@@ -60,8 +60,14 @@ section {
             border-radius: $border-radius;
             color: $second-color;
             padding: 0.5rem 0.5rem;
+            margin-inline: 0.2rem;
+
             &:hover {
                 background: $third-color;
+            }
+            &.active {
+                background: $second-color;
+                color: $fourth-color;
             }
         }
         .per-page {
@@ -76,7 +82,8 @@ section {
             }
         }
     }
-    .addEnglish {
+    .add-english,
+    .search-english {
         text-align: left;
         & input {
             border: none;
@@ -108,6 +115,9 @@ section {
         > h3 {
             margin-inline: auto;
         }
+        .no-list {
+            margin-inline: auto;
+        }
         .card {
             padding: 0.5rem 1.5rem;
             background: $fourth-color;
@@ -129,11 +139,11 @@ section {
             .delete,
             .star {
                 position: absolute;
-                top: -1.2rem;
+                top: -0.9rem;
                 border: none;
                 color: $second-color;
                 padding: 0.1rem 0.2rem;
-                border-radius: 0.2rem 0.2rem 0 0;
+                border-radius: 0.2rem;
                 background: $fourth-color;
                 display: flex;
                 align-items: center;
@@ -177,6 +187,25 @@ button.active {
         margin-inline: 0.5rem;
         &:hover {
             background: $third-color;
+        }
+    }
+}
+
+.page-list {
+    margin-block: 3rem;
+    button {
+        border: none;
+        margin-inline: 0.2rem;
+        color: $fourth-color;
+        background: $second-color;
+        min-height: 2rem;
+        min-width: 2rem;
+        border-radius: $border-radius;
+        &:hover {
+            background: $first-color;
+        }
+        &.active {
+            background: $first-color;
         }
     }
 }

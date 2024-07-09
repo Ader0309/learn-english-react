@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 export default function Modal({
     modalTitle,
@@ -14,16 +15,13 @@ export default function Modal({
             modalRef.current.close();
         }
     }, [openModal]);
-    return (
-        <>
-            <dialog className="modal" ref={modalRef} onCancel={closeModal}>
-                <h2>{modalTitle}</h2>
-                {!showCancelButton && (
-                    <button onClick={closeModal}>確定</button>
-                )}
-                {showCancelButton && <button>刪除</button>}
-                {showCancelButton && <button onClick={closeModal}>取消</button>}
-            </dialog>
-        </>
+    return createPortal(
+        <dialog className="modal" ref={modalRef} onCancel={closeModal}>
+            <h2>{modalTitle}</h2>
+            {!showCancelButton && <button onClick={closeModal}>確定</button>}
+            {showCancelButton && <button>刪除</button>}
+            {showCancelButton && <button onClick={closeModal}>取消</button>}
+        </dialog>,
+        document.getElementById("modal")
     );
 }

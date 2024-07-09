@@ -1,10 +1,19 @@
 import { RxCross2 } from "react-icons/rx";
 import { AiFillStar } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Card({ english, chinese }) {
+const path = "http://localhost:3000";
+
+export default function Card({
+    english,
+    chinese,
+    important,
+    addImportant,
+    deleteEnglish,
+}) {
     const [hover, setHover] = useState(false);
     const [visibleChinese, setVisibleChinese] = useState(false);
+
     function handleMouseEnter() {
         setHover(true);
     }
@@ -14,6 +23,16 @@ export default function Card({ english, chinese }) {
     function handleChineseVisible() {
         setVisibleChinese((prev) => !prev);
     }
+
+    function handleButtonStar(e) {
+        e.stopPropagation();
+        addImportant({ english });
+    }
+    function handleButtonDelete(e) {
+        e.stopPropagation();
+        deleteEnglish({ english });
+    }
+
     return (
         <div
             className="card"
@@ -24,15 +43,15 @@ export default function Card({ english, chinese }) {
             <h3 className="english">{english}</h3>
             <div className="line"></div>
             {visibleChinese && <h4 className="chinese">{chinese}</h4>}
+            {(important || hover) && (
+                <button className="star" onClick={handleButtonStar}>
+                    <AiFillStar />
+                </button>
+            )}
             {hover && (
-                <>
-                    <button className="delete">
-                        <RxCross2 />
-                    </button>
-                    <button className="star">
-                        <AiFillStar />
-                    </button>
-                </>
+                <button className="delete" onClick={handleButtonDelete}>
+                    <RxCross2 />
+                </button>
             )}
         </div>
     );

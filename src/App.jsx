@@ -1,6 +1,6 @@
 import "normalize.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import List from "./pages/List";
+import ListIndex from "./pages/ListIndex";
 import Important from "./pages/Important";
 import Test from "./pages/Test";
 import Layout from "./pages/Layout";
@@ -12,7 +12,7 @@ export default function App() {
             path: "",
             element: <Layout />,
             children: [
-                { path: "", element: <List /> },
+                { path: "", element: <ListIndex /> },
                 { path: "important", element: <Important /> },
                 { path: "test", element: <Test /> },
             ],

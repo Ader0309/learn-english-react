@@ -60,9 +60,14 @@ section .list-top button {
   border-radius: 0.5rem;
   color: #a67b5b;
   padding: 0.5rem 0.5rem;
+  margin-inline: 0.2rem;
 }
 section .list-top button:hover {
   background: #ecc176;
+}
+section .list-top button.active {
+  background: #a67b5b;
+  color: #fff1e4;
 }
 section .list-top .per-page {
   margin-left: auto;
@@ -75,10 +80,12 @@ section .list-top .per-page span {
 section .list-top .per-page button {
   margin-inline: 0.2rem;
 }
-section .addEnglish {
+section .add-english,
+section .search-english {
   text-align: left;
 }
-section .addEnglish input {
+section .add-english input,
+section .search-english input {
   border: none;
   margin: 1rem 1rem 0 0;
   background: #fff1e4;
@@ -86,18 +93,21 @@ section .addEnglish input {
   color: #a67b5b;
   border-radius: 0.5rem;
 }
-section .addEnglish input:focus-visible {
+section .add-english input:focus-visible,
+section .search-english input:focus-visible {
   outline: none;
   box-shadow: 0 0 5px #6f4e37;
 }
-section .addEnglish button {
+section .add-english button,
+section .search-english button {
   background: #a67b5b;
   border: none;
   border-radius: 0.5rem;
   color: #fff1e4;
   padding: 0.5rem 1rem;
 }
-section .addEnglish button:hover {
+section .add-english button:hover,
+section .search-english button:hover {
   background: #6f4e37;
 }
 section .list {
@@ -106,6 +116,9 @@ section .list {
   margin-block: 2.5rem;
 }
 section .list > h3 {
+  margin-inline: auto;
+}
+section .list .no-list {
   margin-inline: auto;
 }
 section .list .card {
@@ -130,11 +143,11 @@ section .list .card .line {
 section .list .card .delete,
 section .list .card .star {
   position: absolute;
-  top: -1.2rem;
+  top: -0.9rem;
   border: none;
   color: #a67b5b;
   padding: 0.1rem 0.2rem;
-  border-radius: 0.2rem 0.2rem 0 0;
+  border-radius: 0.2rem;
   background: #fff1e4;
   display: flex;
   align-items: center;
@@ -178,4 +191,23 @@ button.active {
 }
 .modal button:hover {
   background: #ecc176;
+}
+
+.page-list {
+  margin-block: 3rem;
+}
+.page-list button {
+  border: none;
+  margin-inline: 0.2rem;
+  color: #fff1e4;
+  background: #a67b5b;
+  min-height: 2rem;
+  min-width: 2rem;
+  border-radius: 0.5rem;
+}
+.page-list button:hover {
+  background: #6f4e37;
+}
+.page-list button.active {
+  background: #6f4e37;
 }/*# sourceMappingURL=index.css.map */
