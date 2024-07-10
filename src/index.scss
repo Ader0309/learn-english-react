@@ -208,6 +208,8 @@ button.active {
 
 .page-list {
     margin-block: 3rem;
+    display: flex;
+    justify-content: center;
     button {
         border: none;
         margin-inline: 0.2rem;

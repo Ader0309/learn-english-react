@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import AddEnglish from "../components/AddEnglish";
 import Modal from "../components/Modal";
 import List from "../components/List";
-import PageList from "./PageList";
+import PageList from "../components/PageList";
+import usePagination from "../hooks/usePagination";
 
 const path = "http://localhost:3000";
 
@@ -15,34 +16,19 @@ export default function ListIndex() {
     const [searchInput, setSearchInput] = useState("");
     const [searchChinese, setSearchChinese] = useState("");
 
-    //頁碼用
-    const [perPage, setPerPage] = useState(25);
-    const [currentPage, setCurrentPage] = useState(1);
-    const pageNum = Math.ceil(allEnglishList.length / perPage);
-    const indexOfSplic = perPage * (currentPage - 1);
-    const [currentEnglishList, setCurrentEnglishList] = useState([]);
+    const {
+        setPerPage,
+        setCurrentPage,
+        currentData,
+        currentPage,
+        perPage,
+        currentEnglishList,
+        pageNum,
+        handlePageClick,
+        handleNextPageClick,
+        handlePrevPageClick,
+    } = usePagination(allEnglishList);
 
-    //取得每頁資料
-    function currentData() {
-        const copyList = [...allEnglishList];
-        setCurrentEnglishList(copyList.splice(indexOfSplic, perPage));
-    }
-    //點擊頁碼
-    function handlePageClick(e) {
-        setCurrentPage(Number(e.target.name));
-    }
-    //下一頁
-    function handleNextPageClick() {
-        if (currentPage < pageNum) {
-            setCurrentPage(currentPage + 1);
-        }
-    }
-    //上一頁
-    function handlePrevPageClick() {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    }
     //點擊每頁幾筆
     function handlePerPage(num) {
         setPerPage(num);

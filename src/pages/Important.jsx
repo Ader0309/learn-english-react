@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
 import ListTop from "../components/ListTop";
 import List from "../components/List";
-import { useState, useEffect } from "react";
+import Modal from "../components/Modal";
+import PageList from "../components/PageList";
+import usePagination from "../hooks/usePagination";
 
 const path = "http://localhost:3000";
 
@@ -29,12 +32,12 @@ export default function Important() {
         getData();
     }, []);
     return (
-        <section>
-            <ListTop />
-            <List
-                fetching={fetching}
-                currentEnglishList={allEnglishList}
-            ></List>
-        </section>
+        <>
+            <Modal />
+            <List fetching={fetching} currentEnglishList={allEnglishList}>
+                <ListTop />
+            </List>
+            <PageList />
+        </>
     );
 }
