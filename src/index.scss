@@ -226,3 +226,49 @@ button.active {
         }
     }
 }
+
+.test {
+    &:focus-visible {
+        outline: none;
+    }
+    .top {
+        display: flex;
+        button {
+            background: $fourth-color;
+            border: none;
+            border-radius: $border-radius;
+            color: $second-color;
+            padding: 0.5rem 0.5rem;
+            margin-inline: 0.2rem;
+
+            &:hover {
+                background: $third-color;
+            }
+            &.active {
+                background: $second-color;
+                color: $fourth-color;
+            }
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+    .test-zone {
+        margin-top: 2.5rem;
+        .problem {
+            margin-bottom: 1.5rem;
+        }
+        .answers {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            min-height: 4.5rem;
+            h1 {
+                margin-inline: 0.5rem;
+                min-width: 2rem;
+                border-bottom: 2px solid $second-color;
+                color: $first-color;
+            }
+        }
+    }
+}

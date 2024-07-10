@@ -140,13 +140,16 @@ export default function ListIndex() {
 
     //取所有英文單字 API
     const getData = async () => {
-        const response = await fetch(`${path}/api/english-list`).then((res) =>
-            res.json()
-        );
+        const response = await fetch(`${path}/api/english-list`);
+        const data = await response.json();
         try {
-            if (response.status === "success") {
-                setAllEnglishList(response.message);
+            if (data.status === "success") {
+                setAllEnglishList(data.message);
                 setFetching(false);
+                localStorage.setItem(
+                    "allEnglish",
+                    JSON.stringify(data.message)
+                );
             } else {
                 return "取得資料失敗";
             }

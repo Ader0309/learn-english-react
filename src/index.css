@@ -228,4 +228,47 @@ button.active {
 }
 .page-list button.active {
   background: #6f4e37;
+}
+
+.test:focus-visible {
+  outline: none;
+}
+.test .top {
+  display: flex;
+}
+.test .top button {
+  background: #fff1e4;
+  border: none;
+  border-radius: 0.5rem;
+  color: #a67b5b;
+  padding: 0.5rem 0.5rem;
+  margin-inline: 0.2rem;
+}
+.test .top button:hover {
+  background: #ecc176;
+}
+.test .top button.active {
+  background: #a67b5b;
+  color: #fff1e4;
+}
+.test .top button:focus-visible {
+  outline: none;
+}
+.test .test-zone {
+  margin-top: 2.5rem;
+}
+.test .test-zone .problem {
+  margin-bottom: 1.5rem;
+}
+.test .test-zone .answers {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 4.5rem;
+}
+.test .test-zone .answers h1 {
+  margin-inline: 0.5rem;
+  min-width: 2rem;
+  border-bottom: 2px solid #a67b5b;
+  color: #6f4e37;
 }/*# sourceMappingURL=index.css.map */
