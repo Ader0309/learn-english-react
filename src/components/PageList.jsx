@@ -6,6 +6,7 @@ export default function PageList({
     handlePrevPageClick,
 }) {
     const page = Array(pageNum).fill(0);
+
     return (
         <div className="page-list">
             <button onClick={handlePrevPageClick}>{"<"}</button>

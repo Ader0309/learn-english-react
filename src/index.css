@@ -211,6 +211,8 @@ button.active {
 
 .page-list {
   margin-block: 3rem;
+  display: flex;
+  justify-content: center;
 }
 .page-list button {
   border: none;
