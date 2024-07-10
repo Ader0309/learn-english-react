@@ -45,7 +45,7 @@ export default function Important() {
             setModalTitle(response.message);
             setShowModal(true);
             setSearchChinese("");
-            getData();
+            getImportantData();
         } else if (response.status === "error") {
             setModalTitle(response.message);
             setShowModal(true);
@@ -113,8 +113,8 @@ export default function Important() {
         }
     };
 
-    //取所有英文單字 API
-    const getData = async () => {
+    //取所有重要英文單字 API
+    const getImportantData = async () => {
         const response = await fetch(`${path}/api/important-english-list`).then(
             (res) => res.json()
         );
@@ -131,7 +131,7 @@ export default function Important() {
     };
 
     useEffect(() => {
-        getData();
+        getImportantData();
     }, []);
     useEffect(() => {
         if (!fetching) {
