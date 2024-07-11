@@ -1,11 +1,11 @@
 body {
-  background: url(./assets/bg.jpg) center center/cover;
-  background-attachment: fixed;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+    background: url(./assets/bg.jpg) center center/cover;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 h1,
@@ -15,260 +15,292 @@ h3,
 h4,
 h5,
 h6 {
-  margin-block: 1rem;
-  color: #a67b5b;
+    margin-block: 1rem;
+    color: #a67b5b;
 }
 
 button {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+input {
+    border: none;
+    margin: 1rem 1rem 0 0;
+    background: #fff1e4;
+    padding: 0.5rem 1rem;
+    color: #a67b5b;
+    border-radius: 0.5rem;
+}
+input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 5px #6f4e37;
+}
+
+button {
+    background: #a67b5b;
+    border: none;
+    border-radius: 0.5rem;
+    color: #fff1e4;
+    padding: 0.5rem 1rem;
+}
+button:hover {
+    background: #6f4e37;
 }
 
 #root {
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  width: 60vw;
-  min-height: 90vh;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    width: 60vw;
+    min-height: 90vh;
 }
 
 header {
-  margin-block: 3rem;
+    margin-block: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+header .auth {
+    margin-left: auto;
+}
+header .auth a {
+    text-decoration: none;
+}
+header .auth span {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #a67b5b;
+    margin-inline: 0.2rem;
+    padding: 0.5rem;
+}
+header .auth button {
+    font-size: 0.8rem;
+    margin-inline: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    color: #eee;
 }
 header button {
-  padding: 0.5rem 1.5rem;
-  background: #a67b5b;
-  border-radius: 1rem;
-  border: none;
-  color: #eee;
-  margin-inline: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: #a67b5b;
+    border-radius: 1rem;
+    border: none;
+    color: #eee;
+    margin-inline: 0.5rem;
 }
 header button:hover {
-  background: #6f4e37;
+    background: #6f4e37;
 }
 
 section {
-  margin-inline: 2rem;
+    margin-inline: 2rem;
 }
 section .list-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-block: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block: 0.5rem;
 }
 section .list-top button {
-  background: #fff1e4;
-  border: none;
-  border-radius: 0.5rem;
-  color: #a67b5b;
-  padding: 0.5rem 0.5rem;
-  margin-inline: 0.2rem;
+    background: #fff1e4;
+    border: none;
+    border-radius: 0.5rem;
+    color: #a67b5b;
+    padding: 0.5rem 0.5rem;
+    margin-inline: 0.2rem;
 }
 section .list-top button:hover {
-  background: #ecc176;
+    background: #ecc176;
 }
 section .list-top button.active {
-  background: #a67b5b;
-  color: #fff1e4;
+    background: #a67b5b;
+    color: #fff1e4;
 }
 section .list-top .per-page {
-  margin-left: auto;
-  padding: 0.5rem 0.5rem;
+    margin-left: auto;
+    padding: 0.5rem 0.5rem;
 }
 section .list-top .per-page span {
-  margin-right: 0.5rem;
-  color: #a67b5b;
+    margin-right: 0.5rem;
+    color: #a67b5b;
 }
 section .list-top .per-page button {
-  margin-inline: 0.2rem;
+    margin-inline: 0.2rem;
 }
 section .add-english,
 section .search-english {
-  text-align: left;
-}
-section .add-english input,
-section .search-english input {
-  border: none;
-  margin: 1rem 1rem 0 0;
-  background: #fff1e4;
-  padding: 0.5rem 1rem;
-  color: #a67b5b;
-  border-radius: 0.5rem;
-}
-section .add-english input:focus-visible,
-section .search-english input:focus-visible {
-  outline: none;
-  box-shadow: 0 0 5px #6f4e37;
-}
-section .add-english button,
-section .search-english button {
-  background: #a67b5b;
-  border: none;
-  border-radius: 0.5rem;
-  color: #fff1e4;
-  padding: 0.5rem 1rem;
-}
-section .add-english button:hover,
-section .search-english button:hover {
-  background: #6f4e37;
+    text-align: left;
 }
 section .list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-block: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-block: 2.5rem;
 }
 section .list > h3 {
-  margin-inline: auto;
+    margin-inline: auto;
 }
 section .list .no-list {
-  margin-inline: auto;
+    margin-inline: auto;
 }
 section .list .card {
-  padding: 0.5rem 1.5rem;
-  background: #fff1e4;
-  border-radius: 0.5rem;
-  min-height: 6.6rem;
-  width: 6.5rem;
-  position: relative;
-  margin: 0.8rem 1.2rem 1rem 0;
+    padding: 0.5rem 1.5rem;
+    background: #fff1e4;
+    border-radius: 0.5rem;
+    min-height: 6.6rem;
+    width: 6.5rem;
+    position: relative;
+    margin: 0.8rem 1.2rem 1rem 0;
 }
 section .list .card:hover {
-  border-radius: 0 0 0.5rem 0.5rem;
-  box-shadow: 0px 3px 10px #a67b5b;
-  transform: translateY(-2px);
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-shadow: 0px 3px 10px #a67b5b;
+    transform: translateY(-2px);
 }
 section .list .card .line {
-  width: 100%;
-  height: 0.05rem;
-  background: #a67b5b;
+    width: 100%;
+    height: 0.05rem;
+    background: #a67b5b;
 }
 section .list .card .delete,
 section .list .card .star {
-  position: absolute;
-  top: -0.9rem;
-  border: none;
-  color: #a67b5b;
-  padding: 0.1rem 0.2rem;
-  border-radius: 0.2rem;
-  background: #fff1e4;
-  display: flex;
-  align-items: center;
+    position: absolute;
+    top: -0.9rem;
+    border: none;
+    color: #a67b5b;
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.2rem;
+    background: #fff1e4;
+    display: flex;
+    align-items: center;
 }
 section .list .card .delete:hover,
 section .list .card .star:hover {
-  background: #a67b5b;
-  color: #fff1e4;
+    background: #a67b5b;
+    color: #fff1e4;
 }
 section .list .card .delete {
-  right: 0;
+    right: 0;
 }
 section .list .card .star {
-  left: 0;
+    left: 0;
 }
 
 button.active {
-  background: #6f4e37;
+    background: #6f4e37;
 }
 
 .modal {
-  background: #a67b5b;
-  padding: 2rem 2rem;
-  border: none;
-  border-radius: 0.5rem;
-  min-width: 10rem;
+    background: #a67b5b;
+    padding: 2rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    min-width: 10rem;
 }
 .modal::backdrop {
-  background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
 }
 .modal h2,
 .modal h3 {
-  color: #fff1e4;
+    color: #fff1e4;
 }
 .modal button {
-  background: #fff1e4;
-  border: none;
-  border-radius: 0.5rem;
-  color: #a67b5b;
-  padding: 0.5rem 0.5rem;
-  margin-inline: 0.5rem;
+    background: #fff1e4;
+    border: none;
+    border-radius: 0.5rem;
+    color: #a67b5b;
+    padding: 0.5rem 0.5rem;
+    margin-inline: 0.5rem;
 }
 .modal button:hover {
-  background: #ecc176;
+    background: #ecc176;
 }
 
 .modal.search {
-  background: #fff1e4;
+    background: #fff1e4;
 }
 .modal.search h2,
 .modal.search h3 {
-  color: #a67b5b;
+    color: #a67b5b;
 }
 .modal.search button {
-  background: #a67b5b;
-  color: #fff1e4;
+    background: #a67b5b;
+    color: #fff1e4;
 }
 .modal.search button:hover {
-  background: #6f4e37;
+    background: #6f4e37;
 }
 
 .page-list {
-  margin-block: 3rem;
-  display: flex;
-  justify-content: center;
+    margin-block: 3rem;
+    display: flex;
+    justify-content: center;
 }
 .page-list button {
-  border: none;
-  margin-inline: 0.2rem;
-  color: #fff1e4;
-  background: #a67b5b;
-  min-height: 2rem;
-  min-width: 2rem;
-  border-radius: 0.5rem;
+    border: none;
+    margin-inline: 0.2rem;
+    color: #fff1e4;
+    background: #a67b5b;
+    min-height: 2rem;
+    min-width: 2rem;
+    border-radius: 0.5rem;
 }
 .page-list button:hover {
-  background: #6f4e37;
+    background: #6f4e37;
 }
 .page-list button.active {
-  background: #6f4e37;
+    background: #6f4e37;
 }
 
-.test:focus-visible {
-  outline: none;
-}
 .test .top {
-  display: flex;
+    display: flex;
 }
 .test .top button {
-  background: #fff1e4;
-  border: none;
-  border-radius: 0.5rem;
-  color: #a67b5b;
-  padding: 0.5rem 0.5rem;
-  margin-inline: 0.2rem;
+    background: #fff1e4;
+    border: none;
+    border-radius: 0.5rem;
+    color: #a67b5b;
+    padding: 0.5rem 0.5rem;
+    margin-inline: 0.2rem;
 }
 .test .top button:hover {
-  background: #ecc176;
+    background: #ecc176;
 }
 .test .top button.active {
-  background: #a67b5b;
-  color: #fff1e4;
+    background: #a67b5b;
+    color: #fff1e4;
 }
 .test .top button:focus-visible {
-  outline: none;
+    outline: none;
 }
 .test .test-zone {
-  margin-top: 2.5rem;
+    margin-top: 2.5rem;
+    padding-block: 1rem;
+}
+.test .test-zone.focused {
+    outline: 1px solid #a67b5b;
+}
+.test .test-zone:focus-visible {
+    outline: 1px solid #a67b5b;
 }
 .test .test-zone .problem {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 .test .test-zone .answers {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  min-height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 4.5rem;
 }
 .test .test-zone .answers h1 {
-  margin-inline: 0.5rem;
-  min-width: 2rem;
-  border-bottom: 2px solid #a67b5b;
-  color: #6f4e37;
-}/*# sourceMappingURL=index.css.map */
+    margin-inline: 0.5rem;
+    min-width: 2rem;
+    border-bottom: 2px solid #a67b5b;
+    color: #6f4e37;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form button {
+    margin-top: 1rem;
+} /*# sourceMappingURL=index.css.map */

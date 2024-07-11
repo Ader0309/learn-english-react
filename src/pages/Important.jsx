@@ -4,6 +4,7 @@ import List from "../components/List";
 import Modal from "../components/Modal";
 import PageList from "../components/PageList";
 import usePagination from "../hooks/usePagination";
+import { useSelector } from "react-redux";
 
 const path = "http://localhost:3000";
 
@@ -28,6 +29,8 @@ export default function Important() {
         handleNextPageClick,
         handlePrevPageClick,
     } = usePagination(allEnglishList);
+
+    const isAuth = useSelector((state) => state.auth.auth);
 
     function handleShowSearch() {
         setShowSearch((prev) => !prev);
@@ -147,28 +150,34 @@ export default function Important() {
                 modalTitle={modalTitle}
                 searchChinese={searchChinese}
             />
-            <List
-                fetching={fetching}
-                currentEnglishList={currentEnglishList}
-                addImportant={addImportant}
-                deleteEnglish={deleteEnglish}
-            >
-                <ListTop
-                    handleSearchChange={handleSearchChange}
-                    handleDoSearch={handleDoSearch}
-                    handlePerPage={handlePerPage}
-                    perPage={perPage}
-                    showSearch={showSearch}
-                    handleShowSearch={handleShowSearch}
-                />
-            </List>
-            <PageList
-                pageNum={pageNum}
-                handlePageClick={handlePageClick}
-                currentPage={currentPage}
-                handleNextPageClick={handleNextPageClick}
-                handlePrevPageClick={handlePrevPageClick}
-            />
+            {isAuth ? (
+                <>
+                    <List
+                        fetching={fetching}
+                        currentEnglishList={currentEnglishList}
+                        addImportant={addImportant}
+                        deleteEnglish={deleteEnglish}
+                    >
+                        <ListTop
+                            handleSearchChange={handleSearchChange}
+                            handleDoSearch={handleDoSearch}
+                            handlePerPage={handlePerPage}
+                            perPage={perPage}
+                            showSearch={showSearch}
+                            handleShowSearch={handleShowSearch}
+                        />
+                    </List>
+                    <PageList
+                        pageNum={pageNum}
+                        handlePageClick={handlePageClick}
+                        currentPage={currentPage}
+                        handleNextPageClick={handleNextPageClick}
+                        handlePrevPageClick={handlePrevPageClick}
+                    />
+                </>
+            ) : (
+                <h1>請先登入</h1>
+            )}
         </>
     );
 }

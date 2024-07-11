@@ -26,6 +26,29 @@ h6 {
 button {
     cursor: pointer;
 }
+input {
+    border: none;
+    margin: 1rem 1rem 0 0;
+    background: $fourth-color;
+    padding: 0.5rem 1rem;
+    color: $second-color;
+    border-radius: $border-radius;
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 5px $first-color;
+    }
+}
+button {
+    background: $second-color;
+    border: none;
+    border-radius: $border-radius;
+    color: $fourth-color;
+    padding: 0.5rem 1rem;
+    &:hover {
+        background: $first-color;
+    }
+}
+
 #root {
     backdrop-filter: blur(2px);
     width: 60vw;
@@ -33,7 +56,28 @@ button {
 }
 
 header {
-    margin-block: 3rem;
+    margin-block: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    & .auth {
+        margin-left: auto;
+        a {
+            text-decoration: none;
+        }
+        span {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: $second-color;
+            margin-inline: 0.2rem;
+            padding: 0.5rem;
+        }
+        button {
+            font-size: 0.8rem;
+            margin-inline: 0.2rem;
+            padding: 0.2rem 0.5rem;
+            color: $white;
+        }
+    }
     button {
         padding: 0.5rem 1.5rem;
         background: $second-color;
@@ -85,28 +129,6 @@ section {
     .add-english,
     .search-english {
         text-align: left;
-        & input {
-            border: none;
-            margin: 1rem 1rem 0 0;
-            background: $fourth-color;
-            padding: 0.5rem 1rem;
-            color: $second-color;
-            border-radius: $border-radius;
-            &:focus-visible {
-                outline: none;
-                box-shadow: 0 0 5px $first-color;
-            }
-        }
-        & button {
-            background: $second-color;
-            border: none;
-            border-radius: $border-radius;
-            color: $fourth-color;
-            padding: 0.5rem 1rem;
-            &:hover {
-                background: $first-color;
-            }
-        }
     }
     .list {
         display: flex;
@@ -228,9 +250,6 @@ button.active {
 }
 
 .test {
-    &:focus-visible {
-        outline: none;
-    }
     .top {
         display: flex;
         button {
@@ -255,6 +274,13 @@ button.active {
     }
     .test-zone {
         margin-top: 2.5rem;
+        padding-block: 1rem;
+        &.focused {
+            outline: 1px solid $second-color;
+        }
+        &:focus-visible {
+            outline: 1px solid $second-color;
+        }
         .problem {
             margin-bottom: 1.5rem;
         }
@@ -270,5 +296,14 @@ button.active {
                 color: $first-color;
             }
         }
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button {
+        margin-top: 1rem;
     }
 }

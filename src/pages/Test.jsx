@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "../components/Modal";
+import { useSelector } from "react-redux";
 
 export default function Test() {
     const [showModal, setShowModal] = useState(false);
@@ -10,6 +11,8 @@ export default function Test() {
     const englishList = JSON.parse(localStorage.getItem("allEnglish"));
 
     const sectionRef = useRef(null);
+
+    const isAuth = useSelector((state) => state.auth.auth);
 
     //已隨機數，取得單字清單內的某筆資料
     function getRandom() {
@@ -78,15 +81,29 @@ export default function Test() {
         setFinalAnswer(Array(newProblem.english.length).fill(""));
     }
 
-    useEffect(() => {
-        const initialProblem = getRandom();
-        setProblem(initialProblem);
-        setAnswer(initialProblem.english);
-        setFinalAnswer(Array(initialProblem.english.length).fill(""));
-
-        // 進入頁面時，focus在section
+    const handleFocus = () => {
         if (sectionRef.current) {
-            sectionRef.current.focus();
+            sectionRef.current.classList.add("focused");
+        }
+    };
+
+    const handleBlur = () => {
+        if (sectionRef.current) {
+            sectionRef.current.classList.remove("focused");
+        }
+    };
+
+    useEffect(() => {
+        if (englishList) {
+            const initialProblem = getRandom();
+            setProblem(initialProblem);
+            setAnswer(initialProblem.english);
+            setFinalAnswer(Array(initialProblem.english.length).fill(""));
+
+            // 進入頁面時，focus在section
+            if (sectionRef.current) {
+                sectionRef.current.focus();
+            }
         }
     }, []);
     return (
@@ -97,27 +114,38 @@ export default function Test() {
                 showCancelButton={false}
                 modalTitle={modalTitle}
             />
-            <section
-                className="test"
-                ref={sectionRef}
-                onKeyDown={showModal ? "" : handleKeyDown}
-                tabIndex={0}
-            >
-                <div className="top">
-                    <button onClick={handleHintClick}>提示一字</button>
-                    <button onClick={handleNextQuestion}>下一題</button>
-                </div>
-                <div className="test-zone">
-                    <div className="problem">
-                        <h2>{problem.chinese}</h2>
-                    </div>
-                    <div className="answers">
-                        {finalAnswer.map((v, i) => {
-                            return <h1 key={i}>{v}</h1>;
-                        })}
-                    </div>
-                </div>
-            </section>
+            {isAuth ? (
+                englishList ? (
+                    <section className="test">
+                        <div className="top">
+                            <button onClick={handleHintClick}>提示一字</button>
+                            <button onClick={handleNextQuestion}>下一題</button>
+                        </div>
+                        <div
+                            className="test-zone"
+                            ref={sectionRef}
+                            onKeyDown={showModal ? "" : handleKeyDown}
+                            tabIndex={0}
+                            onFocus={handleFocus}
+                            onBlur={handleBlur}
+                        >
+                            <div className="problem">
+                                <h2>{problem.chinese}</h2>
+                            </div>
+                            <div className="answers">
+                                {finalAnswer.map((v, i) => {
+                                    return <h1 key={i}>{v}</h1>;
+                                })}
+                            </div>
+                        </div>
+                    </section>
+                ) : (
+                    <h1>尚無加入之單字</h1>
+                )
+            ) : (
+                <h1>請先登入</h1>
+            )}
+            {}
         </>
     );
 }

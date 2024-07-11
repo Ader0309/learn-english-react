@@ -4,6 +4,7 @@ import Modal from "../components/Modal";
 import List from "../components/List";
 import PageList from "../components/PageList";
 import usePagination from "../hooks/usePagination";
+import { useSelector } from "react-redux";
 
 const path = "http://localhost:3000";
 
@@ -28,6 +29,8 @@ export default function ListIndex() {
         handleNextPageClick,
         handlePrevPageClick,
     } = usePagination(allEnglishList);
+
+    const isAuth = useSelector((state) => state.auth.auth);
 
     //點擊每頁幾筆
     function handlePerPage(num) {
@@ -175,30 +178,36 @@ export default function ListIndex() {
                 modalTitle={modalTitle}
                 searchChinese={searchChinese}
             />
-            <List
-                fetching={fetching}
-                currentEnglishList={currentEnglishList}
-                addImportant={addImportant}
-                deleteEnglish={deleteEnglish}
-            >
-                <AddEnglish
-                    handleInputChange={handleInputChange}
-                    handleAddData={handleAddData}
-                    addData={addData}
-                    handlePerPage={handlePerPage}
-                    perPage={perPage}
-                    searchInput={searchInput}
-                    handleSearchChange={handleSearchChange}
-                    handleDoSearch={handleDoSearch}
-                />
-            </List>
-            <PageList
-                pageNum={pageNum}
-                handlePageClick={handlePageClick}
-                currentPage={currentPage}
-                handleNextPageClick={handleNextPageClick}
-                handlePrevPageClick={handlePrevPageClick}
-            />
+            {isAuth ? (
+                <>
+                    <List
+                        fetching={fetching}
+                        currentEnglishList={currentEnglishList}
+                        addImportant={addImportant}
+                        deleteEnglish={deleteEnglish}
+                    >
+                        <AddEnglish
+                            handleInputChange={handleInputChange}
+                            handleAddData={handleAddData}
+                            addData={addData}
+                            handlePerPage={handlePerPage}
+                            perPage={perPage}
+                            searchInput={searchInput}
+                            handleSearchChange={handleSearchChange}
+                            handleDoSearch={handleDoSearch}
+                        />
+                    </List>
+                    <PageList
+                        pageNum={pageNum}
+                        handlePageClick={handlePageClick}
+                        currentPage={currentPage}
+                        handleNextPageClick={handleNextPageClick}
+                        handlePrevPageClick={handlePrevPageClick}
+                    />
+                </>
+            ) : (
+                <h1>請先登入</h1>
+            )}
         </>
     );
 }
