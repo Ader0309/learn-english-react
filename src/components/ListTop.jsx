@@ -11,51 +11,57 @@ export default function ListTop({
     handleSearchChange,
     handleDoSearch,
 }) {
+    function handleSubmit(e) {
+        e.preventDefault();
+        handleDoSearch();
+    }
     return (
         <>
             <div className="list-top">
                 {children}
                 <button onClick={handleShowSearch}>
-                    {showSearch ? "關閉搜尋" : "搜尋單字"}
+                    {showSearch ? "關閉" : "搜尋"}
                 </button>
                 <div className="per-page">
-                    <span>每頁顯示:</span>
-                    <button
-                        onClick={() => {
-                            handlePerPage(25);
-                        }}
-                        className={perPage === 25 ? "active" : ""}
-                    >
-                        25
-                    </button>
-                    <button
-                        onClick={() => {
-                            handlePerPage(50);
-                        }}
-                        className={perPage === 50 ? "active" : ""}
-                    >
-                        50
-                    </button>
-                    <button
-                        onClick={() => {
-                            handlePerPage(100);
-                        }}
-                        className={perPage === 100 ? "active" : ""}
-                    >
-                        100
-                    </button>
+                    <span>每頁:</span>
+                    <div>
+                        <button
+                            onClick={() => {
+                                handlePerPage(24);
+                            }}
+                            className={perPage === 24 ? "active" : ""}
+                        >
+                            24
+                        </button>
+                        <button
+                            onClick={() => {
+                                handlePerPage(48);
+                            }}
+                            className={perPage === 48 ? "active" : ""}
+                        >
+                            48
+                        </button>
+                        <button
+                            onClick={() => {
+                                handlePerPage(72);
+                            }}
+                            className={perPage === 72 ? "active" : ""}
+                        >
+                            72
+                        </button>
+                    </div>
                 </div>
             </div>
             {showSearch && (
-                <div className="search-english">
+                <form onSubmit={handleSubmit} className="search-english">
                     <input
                         type="text"
                         placeholder="請輸入完整英文單字"
                         value={searchInput}
                         onChange={handleSearchChange}
                     />
-                    <button onClick={handleDoSearch}>送出</button>
-                </div>
+                    <button>送出</button>
+                </form>
             )}
             {children2}
         </>

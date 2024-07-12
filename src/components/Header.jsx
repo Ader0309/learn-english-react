@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import Auth from "./Auth";
 
 export default function Header({ title }) {
     return (
         <header>
+            <Auth />
             <h1>{title}</h1>
             <div>
                 <Link to="">

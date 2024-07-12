@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function usePagination(allEnglishList) {
     //頁碼用
-    const [perPage, setPerPage] = useState(25);
+    const [perPage, setPerPage] = useState(24);
     const [currentPage, setCurrentPage] = useState(1);
     const pageNum = Math.ceil(allEnglishList.length / perPage);
     const indexOfSplic = perPage * (currentPage - 1);

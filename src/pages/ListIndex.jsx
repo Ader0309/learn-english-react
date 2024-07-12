@@ -4,6 +4,7 @@ import Modal from "../components/Modal";
 import List from "../components/List";
 import PageList from "../components/PageList";
 import usePagination from "../hooks/usePagination";
+import { useSelector } from "react-redux";
 
 const path = "http://localhost:3000";
 
@@ -28,6 +29,9 @@ export default function ListIndex() {
         handleNextPageClick,
         handlePrevPageClick,
     } = usePagination(allEnglishList);
+
+    const isAuth = useSelector((state) => state.auth.auth);
+    const account = useSelector((state) => state.auth.email);
 
     //點擊每頁幾筆
     function handlePerPage(num) {
@@ -63,6 +67,7 @@ export default function ListIndex() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -83,6 +88,7 @@ export default function ListIndex() {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -101,7 +107,12 @@ export default function ListIndex() {
     // 查詢單字 API
     const searchEnglish = async (data) => {
         const response = await fetch(
-            `${path}/api/english?english=${searchInput}`
+            `${path}/api/english?english=${searchInput}`,
+            {
+                headers: {
+                    "x-user-account": account,
+                },
+            }
         ).then((res) => res.json());
         try {
             if (response.status === "success") {
@@ -128,6 +139,7 @@ export default function ListIndex() {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -140,7 +152,11 @@ export default function ListIndex() {
 
     //取所有英文單字 API
     const getData = async () => {
-        const response = await fetch(`${path}/api/english-list`);
+        const response = await fetch(`${path}/api/english-list`, {
+            headers: {
+                "x-user-account": account,
+            },
+        });
         const data = await response.json();
         try {
             if (data.status === "success") {
@@ -158,8 +174,15 @@ export default function ListIndex() {
         }
     };
     useEffect(() => {
-        getData();
+        const storedData = localStorage.getItem("allEnglish");
+        if (storedData) {
+            setAllEnglishList(JSON.parse(storedData));
+            setFetching(false);
+        } else {
+            getData();
+        }
     }, []);
+
     useEffect(() => {
         if (!fetching) {
             currentData();
@@ -175,30 +198,36 @@ export default function ListIndex() {
                 modalTitle={modalTitle}
                 searchChinese={searchChinese}
             />
-            <List
-                fetching={fetching}
-                currentEnglishList={currentEnglishList}
-                addImportant={addImportant}
-                deleteEnglish={deleteEnglish}
-            >
-                <AddEnglish
-                    handleInputChange={handleInputChange}
-                    handleAddData={handleAddData}
-                    addData={addData}
-                    handlePerPage={handlePerPage}
-                    perPage={perPage}
-                    searchInput={searchInput}
-                    handleSearchChange={handleSearchChange}
-                    handleDoSearch={handleDoSearch}
-                />
-            </List>
-            <PageList
-                pageNum={pageNum}
-                handlePageClick={handlePageClick}
-                currentPage={currentPage}
-                handleNextPageClick={handleNextPageClick}
-                handlePrevPageClick={handlePrevPageClick}
-            />
+            {isAuth ? (
+                <>
+                    <List
+                        fetching={fetching}
+                        currentEnglishList={currentEnglishList}
+                        addImportant={addImportant}
+                        deleteEnglish={deleteEnglish}
+                    >
+                        <AddEnglish
+                            handleInputChange={handleInputChange}
+                            handleAddData={handleAddData}
+                            addData={addData}
+                            handlePerPage={handlePerPage}
+                            perPage={perPage}
+                            searchInput={searchInput}
+                            handleSearchChange={handleSearchChange}
+                            handleDoSearch={handleDoSearch}
+                        />
+                    </List>
+                    <PageList
+                        pageNum={pageNum}
+                        handlePageClick={handlePageClick}
+                        currentPage={currentPage}
+                        handleNextPageClick={handleNextPageClick}
+                        handlePrevPageClick={handlePrevPageClick}
+                    />
+                </>
+            ) : (
+                <h1>請先登入</h1>
+            )}
         </>
     );
 }

@@ -4,6 +4,7 @@ import List from "../components/List";
 import Modal from "../components/Modal";
 import PageList from "../components/PageList";
 import usePagination from "../hooks/usePagination";
+import { useSelector } from "react-redux";
 
 const path = "http://localhost:3000";
 
@@ -28,6 +29,9 @@ export default function Important() {
         handleNextPageClick,
         handlePrevPageClick,
     } = usePagination(allEnglishList);
+
+    const isAuth = useSelector((state) => state.auth.auth);
+    const account = useSelector((state) => state.auth.email);
 
     function handleShowSearch() {
         setShowSearch((prev) => !prev);
@@ -58,6 +62,7 @@ export default function Important() {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -76,7 +81,12 @@ export default function Important() {
     // 查詢單字 API
     const searchEnglish = async (data) => {
         const response = await fetch(
-            `${path}/api/english?english=${searchInput}`
+            `${path}/api/english-important?english=${searchInput}`,
+            {
+                headers: {
+                    "x-user-account": account,
+                },
+            }
         ).then((res) => res.json());
         try {
             if (response.status === "success") {
@@ -103,6 +113,7 @@ export default function Important() {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -115,9 +126,11 @@ export default function Important() {
 
     //取所有重要英文單字 API
     const getImportantData = async () => {
-        const response = await fetch(`${path}/api/important-english-list`).then(
-            (res) => res.json()
-        );
+        const response = await fetch(`${path}/api/important-english-list`, {
+            headers: {
+                "x-user-account": account,
+            },
+        }).then((res) => res.json());
         try {
             if (response.status === "success") {
                 setAllEnglishList(response.message);
@@ -147,28 +160,34 @@ export default function Important() {
                 modalTitle={modalTitle}
                 searchChinese={searchChinese}
             />
-            <List
-                fetching={fetching}
-                currentEnglishList={currentEnglishList}
-                addImportant={addImportant}
-                deleteEnglish={deleteEnglish}
-            >
-                <ListTop
-                    handleSearchChange={handleSearchChange}
-                    handleDoSearch={handleDoSearch}
-                    handlePerPage={handlePerPage}
-                    perPage={perPage}
-                    showSearch={showSearch}
-                    handleShowSearch={handleShowSearch}
-                />
-            </List>
-            <PageList
-                pageNum={pageNum}
-                handlePageClick={handlePageClick}
-                currentPage={currentPage}
-                handleNextPageClick={handleNextPageClick}
-                handlePrevPageClick={handlePrevPageClick}
-            />
+            {isAuth ? (
+                <>
+                    <List
+                        fetching={fetching}
+                        currentEnglishList={currentEnglishList}
+                        addImportant={addImportant}
+                        deleteEnglish={deleteEnglish}
+                    >
+                        <ListTop
+                            handleSearchChange={handleSearchChange}
+                            handleDoSearch={handleDoSearch}
+                            handlePerPage={handlePerPage}
+                            perPage={perPage}
+                            showSearch={showSearch}
+                            handleShowSearch={handleShowSearch}
+                        />
+                    </List>
+                    <PageList
+                        pageNum={pageNum}
+                        handlePageClick={handlePageClick}
+                        currentPage={currentPage}
+                        handleNextPageClick={handleNextPageClick}
+                        handlePrevPageClick={handlePrevPageClick}
+                    />
+                </>
+            ) : (
+                <h1>請先登入</h1>
+            )}
         </>
     );
 }

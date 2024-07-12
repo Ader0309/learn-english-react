@@ -6,6 +6,10 @@ import Test from "./pages/Test";
 import Layout from "./pages/Layout";
 import ErrorPage from "./pages/ErrorPage";
 
+import MemberLayout from "./pages/MemberLayout";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+
 export default function App() {
     const router = createBrowserRouter([
         {
@@ -15,6 +19,15 @@ export default function App() {
                 { path: "", element: <ListIndex /> },
                 { path: "important", element: <Important /> },
                 { path: "test", element: <Test /> },
+            ],
+            errorElement: <ErrorPage />,
+        },
+        {
+            path: "member",
+            element: <MemberLayout />,
+            children: [
+                { path: "signup", element: <SignUp /> },
+                { path: "login", element: <Login /> },
             ],
             errorElement: <ErrorPage />,
         },
