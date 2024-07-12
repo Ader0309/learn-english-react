@@ -14,10 +14,10 @@ export default function MemberForm({ buttonTitle, apiName }) {
     const isAuth = useSelector((state) => state.auth.auth);
 
     const dispatch = useDispatch();
-    function handleLogin() {
-        dispatch(authActions.login(memberData.name));
+    function handleLogin(userData) {
+        dispatch(authActions.login(userData));
         setTimeout(() => {
-            navigate("/");
+            navigate(`/`);
         }, 2000);
     }
 
@@ -37,8 +37,8 @@ export default function MemberForm({ buttonTitle, apiName }) {
             setModalTitle(response.message);
             setShowModal(true);
             if (apiName === "login") {
-                localStorage.setItem("isAuth", memberData.name);
-                handleLogin();
+                localStorage.setItem("isAuth", JSON.stringify(memberData));
+                handleLogin(memberData);
             }
             if (apiName === "signup") {
                 setTimeout(() => {
@@ -64,7 +64,7 @@ export default function MemberForm({ buttonTitle, apiName }) {
                 modalTitle={modalTitle}
             />
             {!isAuth && (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="member-form">
                     <input
                         type="text"
                         name="email"

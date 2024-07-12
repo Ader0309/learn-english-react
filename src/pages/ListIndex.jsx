@@ -31,6 +31,7 @@ export default function ListIndex() {
     } = usePagination(allEnglishList);
 
     const isAuth = useSelector((state) => state.auth.auth);
+    const account = useSelector((state) => state.auth.email);
 
     //點擊每頁幾筆
     function handlePerPage(num) {
@@ -66,6 +67,7 @@ export default function ListIndex() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -86,6 +88,7 @@ export default function ListIndex() {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -104,7 +107,12 @@ export default function ListIndex() {
     // 查詢單字 API
     const searchEnglish = async (data) => {
         const response = await fetch(
-            `${path}/api/english?english=${searchInput}`
+            `${path}/api/english?english=${searchInput}`,
+            {
+                headers: {
+                    "x-user-account": account,
+                },
+            }
         ).then((res) => res.json());
         try {
             if (response.status === "success") {
@@ -131,6 +139,7 @@ export default function ListIndex() {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "x-user-account": account,
             },
             body: JSON.stringify(data),
         }).then((res) => res.json());
@@ -143,7 +152,11 @@ export default function ListIndex() {
 
     //取所有英文單字 API
     const getData = async () => {
-        const response = await fetch(`${path}/api/english-list`);
+        const response = await fetch(`${path}/api/english-list`, {
+            headers: {
+                "x-user-account": account,
+            },
+        });
         const data = await response.json();
         try {
             if (data.status === "success") {
@@ -161,8 +174,15 @@ export default function ListIndex() {
         }
     };
     useEffect(() => {
-        getData();
+        const storedData = localStorage.getItem("allEnglish");
+        if (storedData) {
+            setAllEnglishList(JSON.parse(storedData));
+            setFetching(false);
+        } else {
+            getData();
+        }
     }, []);
+
     useEffect(() => {
         if (!fetching) {
             currentData();

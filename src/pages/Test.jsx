@@ -14,7 +14,7 @@ export default function Test() {
 
     const isAuth = useSelector((state) => state.auth.auth);
 
-    //已隨機數，取得單字清單內的某筆資料
+    //隨機數，取得單字清單內的某筆資料
     function getRandom() {
         return englishList[Math.floor(Math.random() * englishList.length)];
     }

@@ -4,6 +4,18 @@ $third-color: #ecc176;
 $fourth-color: #fff1e4;
 $white: #eee;
 $border-radius: 0.5rem;
+$breakpoint-small: 576px;
+$breakpoint-medium: 992px;
+
+:root {
+    font-size: 16px;
+    @media screen and (max-width: $breakpoint-medium) {
+        font-size: 0.9rem;
+    }
+    @media screen and (max-width: $breakpoint-small) {
+        font-size: 0.8rem;
+    }
+}
 body {
     background: url(./assets/bg.jpg) center center/cover;
     background-attachment: fixed;
@@ -28,15 +40,25 @@ button {
 }
 input {
     border: none;
-    margin: 1rem 1rem 0 0;
+    margin: 0 0 0 0.4rem;
     background: $fourth-color;
     padding: 0.5rem 1rem;
     color: $second-color;
     border-radius: $border-radius;
+
     &:focus-visible {
         outline: none;
         box-shadow: 0 0 5px $first-color;
     }
+}
+// 修改自動填入時的預設CSS
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: $second-color;
+    -webkit-box-shadow: none;
+    transition: background-color 5000s ease-in-out 0s;
 }
 button {
     background: $second-color;
@@ -47,18 +69,30 @@ button {
     &:hover {
         background: $first-color;
     }
+    &:focus-visible {
+        outline: none;
+    }
 }
 
 #root {
     backdrop-filter: blur(2px);
-    width: 60vw;
+    width: 70vw;
     min-height: 90vh;
+    @media screen and (max-width: $breakpoint-medium) {
+        width: 75vw;
+    }
+    @media screen and (max-width: $breakpoint-small) {
+        width: 90vw;
+    }
 }
 
 header {
-    margin-block: 2.5rem;
+    margin: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: $breakpoint-small) {
+        margin-block: 1.5rem;
+    }
     & .auth {
         margin-left: auto;
         a {
@@ -70,6 +104,9 @@ header {
             color: $second-color;
             margin-inline: 0.2rem;
             padding: 0.5rem;
+            @media screen and (max-width: $breakpoint-small) {
+                padding: 0.2rem;
+            }
         }
         button {
             font-size: 0.8rem;
@@ -88,23 +125,59 @@ header {
         &:hover {
             background: $first-color;
         }
+        @media screen and (max-width: $breakpoint-small) {
+            padding: 0.3rem 0.8rem;
+            margin-inline: 0.3rem;
+        }
     }
 }
 
 section {
     margin-inline: 2rem;
+    form {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        @media screen and (max-width: $breakpoint-small) {
+            justify-content: center;
+        }
+        input {
+            @media screen and (max-width: $breakpoint-medium) {
+                width: calc(50% - 2.4rem);
+                margin-bottom: 1rem;
+            }
+            @media screen and (max-width: $breakpoint-small) {
+                width: 100%;
+                margin-block: 0.4rem;
+            }
+        }
+        button {
+            margin-left: 0.4rem;
+            @media screen and (max-width: $breakpoint-medium) {
+                margin-inline: auto;
+                margin-bottom: 1rem;
+            }
+            @media screen and (max-width: $breakpoint-small) {
+                margin-top: 0.4rem;
+            }
+        }
+    }
     .list-top {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-block: 0.5rem;
+        @media screen and (max-width: $breakpoint-small) {
+            margin-block: 0.2rem;
+        }
         button {
             background: $fourth-color;
             border: none;
             border-radius: $border-radius;
             color: $second-color;
-            padding: 0.5rem 0.5rem;
-            margin-inline: 0.2rem;
+            padding: 0.5rem;
+            margin-left: 0.4rem;
 
             &:hover {
                 background: $third-color;
@@ -113,16 +186,28 @@ section {
                 background: $second-color;
                 color: $fourth-color;
             }
+            @media screen and (max-width: $breakpoint-small) {
+                padding: 0.3rem;
+            }
         }
         .per-page {
             margin-left: auto;
-            padding: 0.5rem 0.5rem;
+            // padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            @media screen and (max-width: $breakpoint-small) {
+                padding: 0;
+            }
+
             span {
                 margin-right: 0.5rem;
                 color: $second-color;
+                @media screen and (max-width: $breakpoint-small) {
+                    margin-right: 0.2rem;
+                }
             }
             button {
-                margin-inline: 0.2rem;
+                margin-left: 0.2rem;
             }
         }
     }
@@ -134,6 +219,7 @@ section {
         display: flex;
         flex-wrap: wrap;
         margin-block: 2.5rem;
+        justify-content: flex-start;
         > h3 {
             margin-inline: auto;
         }
@@ -145,9 +231,15 @@ section {
             background: $fourth-color;
             border-radius: $border-radius;
             min-height: 6.6rem;
-            width: 6.5rem;
+            width: calc(25% - 3.8rem);
             position: relative;
-            margin: 0.8rem 1.2rem 1rem 0;
+            margin: 1rem 0.4rem 1rem 0.4rem;
+            @media screen and (max-width: $breakpoint-medium) {
+                width: calc(33.3% - 3.8rem);
+            }
+            @media screen and (max-width: $breakpoint-small) {
+                width: calc(50% - 3.8rem);
+            }
             &:hover {
                 border-radius: 0 0 0.5rem 0.5rem;
                 box-shadow: 0px 3px 10px $second-color;
@@ -231,15 +323,17 @@ button.active {
 .page-list {
     margin-block: 3rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     button {
         border: none;
-        margin-inline: 0.2rem;
+        margin: 0.2rem;
         color: $fourth-color;
         background: $second-color;
         min-height: 2rem;
         min-width: 2rem;
         border-radius: $border-radius;
+        padding: 0.2rem;
         &:hover {
             background: $first-color;
         }
@@ -299,10 +393,18 @@ button.active {
     }
 }
 
-form {
+form.member-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    input {
+        width: 30%;
+        margin-block: 0.4rem;
+        @media screen and (max-width: $breakpoint-medium) {
+            width: 50%;
+        }
+    }
+
     button {
         margin-top: 1rem;
     }

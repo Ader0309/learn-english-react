@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ListTop from "./ListTop";
 
 export default function AddEnglish({
@@ -13,6 +13,7 @@ export default function AddEnglish({
 }) {
     const [showAddEnglish, setShowAddEnglish] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
+    const englishRef = useRef();
 
     function handleShowSearch() {
         setShowSearch((prev) => !prev);
@@ -24,18 +25,27 @@ export default function AddEnglish({
         setShowSearch(false);
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        handleAddData();
+        if (englishRef.current) {
+            englishRef.current.focus();
+        }
+    }
+
     return (
         <>
             <ListTop
                 children2={
                     showAddEnglish && (
-                        <div className="add-english">
+                        <form onSubmit={handleSubmit} className="add-english">
                             <input
                                 type="text"
                                 placeholder="請輸入英文"
                                 name="english"
                                 value={addData.english}
                                 onChange={handleInputChange}
+                                ref={englishRef}
                             />
                             <input
                                 type="text"
@@ -44,8 +54,8 @@ export default function AddEnglish({
                                 value={addData.chinese}
                                 onChange={handleInputChange}
                             />
-                            <button onClick={handleAddData}>新增</button>
-                        </div>
+                            <button>新增</button>
+                        </form>
                     )
                 }
                 handlePerPage={handlePerPage}
@@ -57,7 +67,7 @@ export default function AddEnglish({
                 handleDoSearch={handleDoSearch}
             >
                 <button onClick={handleShowAddEnglish}>
-                    {showAddEnglish ? "取消新增" : "新增單字"}
+                    {showAddEnglish ? "取消" : "新增"}
                 </button>
             </ListTop>
         </>

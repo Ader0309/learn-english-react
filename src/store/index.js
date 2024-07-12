@@ -1,6 +1,6 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { auth: false, name: null };
+const initialState = { auth: false, name: null, email: null };
 
 const authSlice = createSlice({
     name: "auth",
@@ -8,11 +8,13 @@ const authSlice = createSlice({
     reducers: {
         login(state, action) {
             state.auth = true;
-            state.name = action.payload;
+            state.name = action.payload.name;
+            state.email = action.payload.email;
         },
         logout(state) {
             state.auth = false;
             state.name = null;
+            state.email = null;
         },
     },
 });

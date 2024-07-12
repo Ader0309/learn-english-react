@@ -1,3 +1,17 @@
+:root {
+    font-size: 16px;
+}
+@media screen and (max-width: 992px) {
+    :root {
+        font-size: 0.9rem;
+    }
+}
+@media screen and (max-width: 576px) {
+    :root {
+        font-size: 0.8rem;
+    }
+}
+
 body {
     background: url(./assets/bg.jpg) center center/cover;
     background-attachment: fixed;
@@ -25,7 +39,7 @@ button {
 
 input {
     border: none;
-    margin: 1rem 1rem 0 0;
+    margin: 0 0 0 0.4rem;
     background: #fff1e4;
     padding: 0.5rem 1rem;
     color: #a67b5b;
@@ -34,6 +48,16 @@ input {
 input:focus-visible {
     outline: none;
     box-shadow: 0 0 5px #6f4e37;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #a67b5b;
+    -webkit-box-shadow: none;
+    -webkit-transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 button {
@@ -46,18 +70,36 @@ button {
 button:hover {
     background: #6f4e37;
 }
+button:focus-visible {
+    outline: none;
+}
 
 #root {
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
-    width: 60vw;
+    width: 70vw;
     min-height: 90vh;
+}
+@media screen and (max-width: 992px) {
+    #root {
+        width: 75vw;
+    }
+}
+@media screen and (max-width: 576px) {
+    #root {
+        width: 90vw;
+    }
 }
 
 header {
-    margin-block: 2.5rem;
+    margin: 2.5rem 2rem;
     display: flex;
     flex-direction: column;
+}
+@media screen and (max-width: 576px) {
+    header {
+        margin-block: 1.5rem;
+    }
 }
 header .auth {
     margin-left: auto;
@@ -71,6 +113,11 @@ header .auth span {
     color: #a67b5b;
     margin-inline: 0.2rem;
     padding: 0.5rem;
+}
+@media screen and (max-width: 576px) {
+    header .auth span {
+        padding: 0.2rem;
+    }
 }
 header .auth button {
     font-size: 0.8rem;
@@ -89,9 +136,52 @@ header button {
 header button:hover {
     background: #6f4e37;
 }
+@media screen and (max-width: 576px) {
+    header button {
+        padding: 0.3rem 0.8rem;
+        margin-inline: 0.3rem;
+    }
+}
 
 section {
     margin-inline: 2rem;
+}
+section form {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+@media screen and (max-width: 576px) {
+    section form {
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 992px) {
+    section form input {
+        width: calc(50% - 2.4rem);
+        margin-bottom: 1rem;
+    }
+}
+@media screen and (max-width: 576px) {
+    section form input {
+        width: 100%;
+        margin-block: 0.4rem;
+    }
+}
+section form button {
+    margin-left: 0.4rem;
+}
+@media screen and (max-width: 992px) {
+    section form button {
+        margin-inline: auto;
+        margin-bottom: 1rem;
+    }
+}
+@media screen and (max-width: 576px) {
+    section form button {
+        margin-top: 0.4rem;
+    }
 }
 section .list-top {
     display: flex;
@@ -99,13 +189,18 @@ section .list-top {
     align-items: center;
     margin-block: 0.5rem;
 }
+@media screen and (max-width: 576px) {
+    section .list-top {
+        margin-block: 0.2rem;
+    }
+}
 section .list-top button {
     background: #fff1e4;
     border: none;
     border-radius: 0.5rem;
     color: #a67b5b;
-    padding: 0.5rem 0.5rem;
-    margin-inline: 0.2rem;
+    padding: 0.5rem;
+    margin-left: 0.4rem;
 }
 section .list-top button:hover {
     background: #ecc176;
@@ -114,16 +209,32 @@ section .list-top button.active {
     background: #a67b5b;
     color: #fff1e4;
 }
+@media screen and (max-width: 576px) {
+    section .list-top button {
+        padding: 0.3rem;
+    }
+}
 section .list-top .per-page {
     margin-left: auto;
-    padding: 0.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+}
+@media screen and (max-width: 576px) {
+    section .list-top .per-page {
+        padding: 0;
+    }
 }
 section .list-top .per-page span {
     margin-right: 0.5rem;
     color: #a67b5b;
 }
+@media screen and (max-width: 576px) {
+    section .list-top .per-page span {
+        margin-right: 0.2rem;
+    }
+}
 section .list-top .per-page button {
-    margin-inline: 0.2rem;
+    margin-left: 0.2rem;
 }
 section .add-english,
 section .search-english {
@@ -133,6 +244,7 @@ section .list {
     display: flex;
     flex-wrap: wrap;
     margin-block: 2.5rem;
+    justify-content: flex-start;
 }
 section .list > h3 {
     margin-inline: auto;
@@ -145,9 +257,19 @@ section .list .card {
     background: #fff1e4;
     border-radius: 0.5rem;
     min-height: 6.6rem;
-    width: 6.5rem;
+    width: calc(25% - 3.8rem);
     position: relative;
-    margin: 0.8rem 1.2rem 1rem 0;
+    margin: 1rem 0.4rem 1rem 0.4rem;
+}
+@media screen and (max-width: 992px) {
+    section .list .card {
+        width: calc(33.3% - 3.8rem);
+    }
+}
+@media screen and (max-width: 576px) {
+    section .list .card {
+        width: calc(50% - 3.8rem);
+    }
 }
 section .list .card:hover {
     border-radius: 0 0 0.5rem 0.5rem;
@@ -231,16 +353,18 @@ button.active {
 .page-list {
     margin-block: 3rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 .page-list button {
     border: none;
-    margin-inline: 0.2rem;
+    margin: 0.2rem;
     color: #fff1e4;
     background: #a67b5b;
     min-height: 2rem;
     min-width: 2rem;
     border-radius: 0.5rem;
+    padding: 0.2rem;
 }
 .page-list button:hover {
     background: #6f4e37;
@@ -296,11 +420,20 @@ button.active {
     color: #6f4e37;
 }
 
-form {
+form.member-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-form button {
+form.member-form input {
+    width: 30%;
+    margin-block: 0.4rem;
+}
+@media screen and (max-width: 992px) {
+    form.member-form input {
+        width: 50%;
+    }
+}
+form.member-form button {
     margin-top: 1rem;
 } /*# sourceMappingURL=index.css.map */

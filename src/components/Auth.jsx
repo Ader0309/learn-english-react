@@ -19,9 +19,15 @@ export default function Auth() {
     useEffect(() => {
         const isAuthLocalStorage = localStorage.getItem("isAuth");
         if (isAuthLocalStorage) {
-            dispatch(authActions.login(isAuthLocalStorage));
-        } else {
-            dispatch(authActions.logout());
+            try {
+                const authData = JSON.parse(isAuthLocalStorage);
+                if (authData.name && authData.email) {
+                    dispatch(authActions.login(authData));
+                }
+            } catch (error) {
+                console.error("error");
+                localStorage.removeItem("isAuth");
+            }
         }
     }, [dispatch]);
     return (
