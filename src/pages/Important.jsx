@@ -142,7 +142,11 @@ export default function Important() {
             return "取得資料失敗";
         }
     };
-
+    useEffect(() => {
+        if (isAuth && account) {
+            getImportantData();
+        }
+    }, [isAuth, account]);
     useEffect(() => {
         getImportantData();
     }, []);
