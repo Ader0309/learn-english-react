@@ -6,7 +6,7 @@ import PageList from "../components/PageList";
 import usePagination from "../hooks/usePagination";
 import { useSelector } from "react-redux";
 
-const path = "http://localhost:3000";
+const path = "https://us-central1-learn-english-abf46.cloudfunctions.net/api";
 
 export default function Important() {
     const [fetching, setFetching] = useState(true);

@@ -6,7 +6,7 @@ import PageList from "../components/PageList";
 import usePagination from "../hooks/usePagination";
 import { useSelector } from "react-redux";
 
-const path = "http://localhost:3000";
+const path = "https://us-central1-learn-english-abf46.cloudfunctions.net/api";
 
 export default function ListIndex() {
     const [fetching, setFetching] = useState(true);
@@ -173,6 +173,11 @@ export default function ListIndex() {
             return "取得資料失敗";
         }
     };
+    useEffect(() => {
+        if (isAuth && account) {
+            getData();
+        }
+    }, [isAuth, account]);
     useEffect(() => {
         const storedData = localStorage.getItem("allEnglish");
         if (storedData) {
