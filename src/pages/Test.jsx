@@ -13,10 +13,12 @@ export default function Test() {
 
     const isAuth = useSelector((state) => state.auth.auth);
 
+    // 取隨機
     function getRandom() {
         return englishList[Math.floor(Math.random() * englishList.length)];
     }
 
+    // 手機鍵盤用
     function handleInputChange(e) {
         const inputValue = e.target.value.toLowerCase();
         const lastChar = inputValue.charAt(inputValue.length - 1);
@@ -32,6 +34,7 @@ export default function Test() {
         }
     }
 
+    // 電腦鍵盤用
     function handleKeyDown(e) {
         if (e.key === "Backspace") {
             e.preventDefault();
@@ -57,6 +60,7 @@ export default function Test() {
         }
     }
 
+    // 提示用
     function handleHintClick() {
         const index = finalAnswer.findIndex((answer) => answer === "");
         if (index !== -1) {
@@ -67,6 +71,7 @@ export default function Test() {
         }
     }
 
+    // 下一題用
     function handleNextQuestion() {
         let newProblem = getRandom();
         while (newProblem === problem) {
