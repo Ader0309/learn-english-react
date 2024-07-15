@@ -126,6 +126,7 @@ export default function Test() {
                             className="test-zone"
                             ref={sectionRef}
                             onKeyDown={showModal ? "" : handleKeyDown}
+                            onClick={() => inputRef.current.focus()}
                             tabIndex={0}
                             onFocus={handleFocus}
                             onBlur={handleBlur}
@@ -133,7 +134,11 @@ export default function Test() {
                             <input
                                 type="text"
                                 ref={inputRef}
-                                style={{ opacity: 0, position: "absolute" }}
+                                style={{
+                                    opacity: 0,
+                                    position: "absolute",
+                                    zIndex: -1,
+                                }}
                                 onKeyDown={handleKeyDown}
                             />
                             <div className="problem">
