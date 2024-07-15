@@ -21,7 +21,7 @@ export default function Test() {
         const inputValue = e.target.value.toLowerCase();
         const lastChar = inputValue.charAt(inputValue.length - 1);
 
-        if (lastChar && /^[A-Z]$/.test(lastChar)) {
+        if (lastChar && /^[a-z]$/.test(lastChar)) {
             const newAnswerArray = [...finalAnswer];
             newAnswerArray[currentIndex] = lastChar;
             setFinalAnswer(newAnswerArray);
