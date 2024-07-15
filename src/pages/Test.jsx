@@ -134,11 +134,6 @@ export default function Test() {
                                 onChange={handleInputChange}
                                 onKeyDown={handleKeyDown}
                                 autoFocus
-                                style={{
-                                    opacity: 0,
-                                    position: "absolute",
-                                    zIndex: -1,
-                                }}
                             />
                         </div>
                     </section>

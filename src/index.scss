@@ -369,6 +369,7 @@ button.active {
     .test-zone {
         margin-top: 2.5rem;
         padding-block: 1rem;
+        position: relative;
         &.focused {
             outline: 1px solid $second-color;
         }
@@ -389,6 +390,14 @@ button.active {
                 border-bottom: 2px solid $second-color;
                 color: $first-color;
             }
+        }
+        input {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     }
 }
