@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 
@@ -6,47 +6,45 @@ export default function Test() {
     const [showModal, setShowModal] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [problem, setProblem] = useState({});
-    const [answer, setAnswer] = useState({});
+    const [answer, setAnswer] = useState("");
     const [finalAnswer, setFinalAnswer] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const englishList = JSON.parse(localStorage.getItem("allEnglish"));
-
-    const sectionRef = useRef(null);
-    const inputRef = useRef(null);
 
     const isAuth = useSelector((state) => state.auth.auth);
 
-    //隨機數，取得單字清單內的某筆資料
+    // 取隨機
     function getRandom() {
         return englishList[Math.floor(Math.random() * englishList.length)];
     }
-    // 控制鍵盤輸入
+
+    // 手機鍵盤用
+    function handleInputChange(e) {
+        const inputValue = e.target.value.toLowerCase();
+        const lastChar = inputValue.charAt(inputValue.length - 1);
+
+        if (lastChar && /^[a-z]$/.test(lastChar)) {
+            const newAnswerArray = [...finalAnswer];
+            newAnswerArray[currentIndex] = lastChar;
+            setFinalAnswer(newAnswerArray);
+
+            if (currentIndex < finalAnswer.length - 1) {
+                setCurrentIndex(currentIndex + 1);
+            }
+        }
+    }
+
+    // 電腦鍵盤用
     function handleKeyDown(e) {
-        //輸入為英文時才能輸入
-        if (e.keyCode >= 65 && e.keyCode <= 90) {
-            const index = finalAnswer.findIndex((answer) => answer === "");
-            if (index !== -1) {
+        if (e.key === "Backspace") {
+            e.preventDefault();
+            if (currentIndex > 0) {
                 const newAnswerArray = [...finalAnswer];
-                newAnswerArray[index] = e.key;
+                newAnswerArray[currentIndex - 1] = "";
                 setFinalAnswer(newAnswerArray);
+                setCurrentIndex(currentIndex - 1);
             }
-        }
-        // 按倒退鍵刪除
-        else if (e.key === "Backspace") {
-            const lastIndex = finalAnswer.reduceRight(
-                (prev, current, index) => {
-                    return prev === -1 && current !== "" ? index : prev;
-                },
-                -1
-            );
-            if (lastIndex !== -1) {
-                const newAnswerArray = [...finalAnswer];
-                newAnswerArray[lastIndex] = "";
-                setFinalAnswer(newAnswerArray);
-            }
-        }
-        // enter送出
-        else if (e.key === "Enter") {
-            // 當為onKeyDown時，會預設是提交表單，所以要阻止
+        } else if (e.key === "Enter") {
             e.preventDefault();
             const finalAnswerStr = finalAnswer.join("");
             if (finalAnswerStr === answer) {
@@ -57,42 +55,33 @@ export default function Test() {
                 setModalTitle("答錯!");
                 setShowModal(true);
                 setFinalAnswer(Array(problem.english.length).fill(""));
+                setCurrentIndex(0);
             }
         }
-        return;
     }
 
+    // 提示用
     function handleHintClick() {
         const index = finalAnswer.findIndex((answer) => answer === "");
         if (index !== -1) {
             const newAnswerArray = [...finalAnswer];
             newAnswerArray[index] = answer[index];
             setFinalAnswer(newAnswerArray);
+            setCurrentIndex(index + 1);
         }
     }
-    // 下一題
+
+    // 下一題用
     function handleNextQuestion() {
         let newProblem = getRandom();
-        // 若跟上一題一樣的話就再隨機取
         while (newProblem === problem) {
             newProblem = getRandom();
         }
         setProblem(newProblem);
         setAnswer(newProblem.english);
         setFinalAnswer(Array(newProblem.english.length).fill(""));
+        setCurrentIndex(0);
     }
-
-    const handleFocus = () => {
-        if (sectionRef.current) {
-            sectionRef.current.classList.add("focused");
-        }
-    };
-
-    const handleBlur = () => {
-        if (sectionRef.current) {
-            sectionRef.current.classList.remove("focused");
-        }
-    };
 
     useEffect(() => {
         if (englishList) {
@@ -100,13 +89,10 @@ export default function Test() {
             setProblem(initialProblem);
             setAnswer(initialProblem.english);
             setFinalAnswer(Array(initialProblem.english.length).fill(""));
-
-            // 進入頁面時，focus在section
-            if (sectionRef.current) {
-                sectionRef.current.focus();
-            }
+            setCurrentIndex(0);
         }
     }, []);
+
     return (
         <>
             <Modal
@@ -122,28 +108,38 @@ export default function Test() {
                             <button onClick={handleHintClick}>提示一字</button>
                             <button onClick={handleNextQuestion}>下一題</button>
                         </div>
-                        <div
-                            className="test-zone"
-                            ref={sectionRef}
-                            onKeyDown={showModal ? "" : handleKeyDown}
-                            tabIndex={0}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
-                        >
-                            <input
-                                type="text"
-                                ref={inputRef}
-                                style={{ opacity: 0, position: "absolute" }}
-                                onKeyDown={handleKeyDown}
-                            />
+                        <div className="test-zone">
                             <div className="problem">
                                 <h2>{problem.chinese}</h2>
                             </div>
                             <div className="answers">
                                 {finalAnswer.map((v, i) => {
-                                    return <h1 key={i}>{v}</h1>;
+                                    return (
+                                        <h1
+                                            key={i}
+                                            className={
+                                                i === currentIndex
+                                                    ? "current"
+                                                    : ""
+                                            }
+                                        >
+                                            {v}
+                                        </h1>
+                                    );
                                 })}
                             </div>
+                            <input
+                                type="text"
+                                value=""
+                                onChange={handleInputChange}
+                                onKeyDown={handleKeyDown}
+                                autoFocus
+                                style={{
+                                    opacity: 0,
+                                    position: "absolute",
+                                    zIndex: -1,
+                                }}
+                            />
                         </div>
                     </section>
                 ) : (
@@ -152,7 +148,6 @@ export default function Test() {
             ) : (
                 <h1>請先登入</h1>
             )}
-            {}
         </>
     );
 }
