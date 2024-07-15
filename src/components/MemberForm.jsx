@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store";
 import { useNavigate } from "react-router-dom";
-const path = "https://us-central1-learn-english-abf46.cloudfunctions.net/api";
+import { path } from "../util/path";
 
 export default function MemberForm({ buttonTitle, apiName }) {
     const [memberData, setMemberData] = useState({ email: "", name: "" });

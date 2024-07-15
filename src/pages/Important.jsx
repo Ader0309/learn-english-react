@@ -5,8 +5,7 @@ import Modal from "../components/Modal";
 import PageList from "../components/PageList";
 import usePagination from "../hooks/usePagination";
 import { useSelector } from "react-redux";
-
-const path = "https://us-central1-learn-english-abf46.cloudfunctions.net/api";
+import { path } from "../util/path";
 
 export default function Important() {
     const [fetching, setFetching] = useState(true);
