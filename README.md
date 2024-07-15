@@ -15,9 +15,11 @@
 + React
 + React Router
 + Redux
++ SCSS
 + 部署於vercel
 
 後端
++ Express
 + Firestore Database
 + Firebase Functions
 
