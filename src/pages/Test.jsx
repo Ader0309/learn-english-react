@@ -11,6 +11,7 @@ export default function Test() {
     const englishList = JSON.parse(localStorage.getItem("allEnglish"));
 
     const sectionRef = useRef(null);
+    const inputRef = useRef(null);
 
     const isAuth = useSelector((state) => state.auth.auth);
 
@@ -129,6 +130,12 @@ export default function Test() {
                             onFocus={handleFocus}
                             onBlur={handleBlur}
                         >
+                            <input
+                                type="text"
+                                ref={inputRef}
+                                style={{ opacity: 0, position: "absolute" }}
+                                onKeyDown={handleKeyDown}
+                            />
                             <div className="problem">
                                 <h2>{problem.chinese}</h2>
                             </div>
