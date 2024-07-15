@@ -18,7 +18,7 @@ export default function Test() {
     }
 
     function handleInputChange(e) {
-        const inputValue = e.target.value.toUpperCase();
+        const inputValue = e.target.value.toLowerCase();
         const lastChar = inputValue.charAt(inputValue.length - 1);
 
         if (lastChar && /^[A-Z]$/.test(lastChar)) {
